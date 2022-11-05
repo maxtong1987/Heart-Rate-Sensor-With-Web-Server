@@ -61,7 +61,6 @@ void setup() {
       ;
   }
 
-  Serial.println("Place your index finger on the sensor with steady pressure.");
   // Initialize display
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if (SSD1306Display::setup() != SSD1306Display::Code::OK) {
@@ -100,6 +99,8 @@ void setup() {
 
   // Start server
   server.begin();
+
+  Serial.println("Place your index finger on the sensor with steady pressure.");
 }
 
 void loop() {
