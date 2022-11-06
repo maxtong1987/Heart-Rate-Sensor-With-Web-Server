@@ -8,10 +8,10 @@
 #include "HeartRateSensor.h"
 #include "SPIFFS.h"
 #include "SSD1306Display.h"
+#include "credentials.h"
 
-// Replace with your network credentials
-const char *ssid = "...";
-const char *password = "...";
+const char *ssid = WIFI_SSID;
+const char *password = WIFI_PASSWD;
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
