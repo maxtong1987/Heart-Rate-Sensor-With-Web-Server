@@ -1,4 +1,4 @@
-#include "SSD1306Display.h"
+#include "Display.h"
 
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-namespace SSD1306Display {
+namespace Display {
 
 // Display settings
 #define SCREEN_WIDTH 128  // OLED display width, in pixels
@@ -67,4 +67,4 @@ void printHeartBeat(int heartBeat) {
   display.display();
 }
 
-};  // namespace SSD1306Display
+};  // namespace Display

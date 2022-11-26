@@ -5,9 +5,9 @@
 #include <SPI.h>
 #include <WiFi.h>
 
+#include "Display.h"
 #include "HeartRateSensor.h"
 #include "SPIFFS.h"
-#include "SSD1306Display.h"
 #include "credentials.h"
 
 const char *ssid = WIFI_SSID;
@@ -63,7 +63,7 @@ void setup() {
 
   // Initialize display
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
-  if (SSD1306Display::setup() != SSD1306Display::Code::OK) {
+  if (Display::setup() != Display::Code::OK) {
     Serial.println(F("SSD1306 allocation failed"));
     while (1)
       ;
@@ -106,10 +106,10 @@ void setup() {
 void loop() {
   HeartRateSensor::loop();
   if (!HeartRateSensor::isFingerDetected()) {
-    SSD1306Display::println("---");
+    Display::println("---");
   } else {
     int beatAvg = HeartRateSensor::getBeatAvg();
-    SSD1306Display::printHeartBeat(beatAvg);
+    Display::printHeartBeat(beatAvg);
   }
   if ((millis() - lastTime) > timerDelay) {
     // Send Events to the client with the Sensor Readings Every 2 seconds
