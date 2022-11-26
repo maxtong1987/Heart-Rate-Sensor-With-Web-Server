@@ -1,6 +1,57 @@
 // Get current sensor readings when the page loads  
 window.addEventListener('load', getReadings);
 
+// Create Temperature Gauge
+var gaugeTemp = new LinearGauge({
+    renderTo: 'gauge-temp',
+    width: 120,
+    height: 400,
+    units: "Temperature C",
+    minValue: 0,
+    startAngle: 90,
+    ticksAngle: 180,
+    maxValue: 40,
+    colorValueBoxRect: "#049faa",
+    colorValueBoxRectEnd: "#049faa",
+    colorValueBoxBackground: "#f1fbfc",
+    valueDec: 2,
+    valueInt: 2,
+    majorTicks: [
+        "0",
+        "5",
+        "10",
+        "15",
+        "20",
+        "25",
+        "30",
+        "35",
+        "40"
+    ],
+    minorTicks: 4,
+    strokeTicks: true,
+    highlights: [
+        {
+            "from": 30,
+            "to": 40,
+            "color": "rgba(200, 50, 50, .75)"
+        }
+    ],
+    colorPlate: "#fff",
+    colorBarProgress: "#CC2936",
+    colorBarProgressEnd: "#049faa",
+    borderShadowWidth: 0,
+    borders: false,
+    needleType: "arrow",
+    needleWidth: 2,
+    needleCircleSize: 7,
+    needleCircleOuter: true,
+    needleCircleInner: false,
+    animationDuration: 1500,
+    animationRule: "linear",
+    barWidth: 10,
+}).draw();
+
+
 // Create BPM Gauge
 var gaugeBpm = new RadialGauge({
     renderTo: 'gauge-bpm',
@@ -69,6 +120,7 @@ function getReadings() {
             var myObj = JSON.parse(this.responseText);
             console.log(myObj);
             gaugeBpm.value = myObj.bpm;
+            gaugeTemp.value = myObj.temp;
         }
     };
     xhr.open("GET", "/readings", true);
@@ -97,5 +149,6 @@ if (!!window.EventSource) {
         var myObj = JSON.parse(e.data);
         console.log(myObj);
         gaugeBpm.value = myObj.bpm;
+        gaugeTemp.value = myObj.temp;
     }, false);
 }
