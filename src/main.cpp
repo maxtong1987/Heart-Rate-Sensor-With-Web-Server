@@ -106,10 +106,10 @@ void setup() {
 void loop() {
   HeartRateSensor::loop();
   if (!HeartRateSensor::isFingerDetected()) {
-    SSD1306Display::showNoFinger();
+    SSD1306Display::println("---");
   } else {
     int beatAvg = HeartRateSensor::getBeatAvg();
-    SSD1306Display::showHeartBeat(beatAvg);
+    SSD1306Display::printHeartBeat(beatAvg);
   }
   if ((millis() - lastTime) > timerDelay) {
     // Send Events to the client with the Sensor Readings Every 2 seconds
